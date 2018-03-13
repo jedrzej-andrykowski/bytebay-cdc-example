@@ -1,1 +1,11 @@
 .idea
+.gradle
+user-service/.gradle
+user-service/build
+user-service/out
+ui/.gradle
+ui/build
+ui/out
+crm/.gradle
+crm/build
+crm/out
