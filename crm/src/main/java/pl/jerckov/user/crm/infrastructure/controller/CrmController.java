@@ -28,9 +28,9 @@ public class CrmController {
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    public String user2(@PathVariable final UUID id, final Model model) {
+    public String user(@PathVariable final UUID id, final Model model) {
         final User user = userService.getUser(id);
-        model.addAttribute(user);
+        model.addAttribute("user", user);
         return "user";
     }
 

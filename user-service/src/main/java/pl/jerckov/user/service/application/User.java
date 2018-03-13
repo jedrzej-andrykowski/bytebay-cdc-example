@@ -36,12 +36,14 @@ public class User {
         final User user = (User) obj;
 
         return new EqualsBuilder().append(id, user.id)
+                                  .append(name, user.name)
                                   .isEquals();
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(id)
+                                    .append(name)
                                     .toHashCode();
     }
 }
