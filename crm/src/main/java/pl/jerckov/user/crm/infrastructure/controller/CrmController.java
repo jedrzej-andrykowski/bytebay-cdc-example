@@ -5,10 +5,12 @@ import pl.jerckov.user.crm.application.UserService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 import java.util.UUID;
@@ -37,5 +39,10 @@ public class CrmController {
     @ModelAttribute("users")
     public List<User> users() {
         return userService.getAllIUsers();
+    }
+
+    @ExceptionHandler(HttpClientErrorException.class)
+    public String userNotFound(final HttpClientErrorException exeption) {
+        return "error";
     }
 }

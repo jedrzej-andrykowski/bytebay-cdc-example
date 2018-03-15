@@ -4,14 +4,17 @@ buildscript {
     }
     dependencies {
         classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.0.RELEASE'
+        classpath "org.springframework.cloud:spring-cloud-contract-gradle-plugin:1.2.1.RELEASE"
     }
 }
 
-group 'pl.bytebay.shop.service'
+group 'pl.jerckov.user.service'
 version '1.0.0'
 
 apply plugin: 'org.springframework.boot'
 apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: 'spring-cloud-contract'
 
 sourceCompatibility = 1.8
 
@@ -19,10 +22,30 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    test {
+        java {
+            srcDir './build/generated-test-sources'
+        }
+    }
+}
+
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web:2.0.0.RELEASE"
     compile "org.apache.commons:commons-lang3:3.7"
+    testCompile 'javax.xml.bind:jaxb-api:2.3.0'
     testCompile "junit:junit:4.12"
     testCompile "org.mockito:mockito-all:1.10.19"
     testCompile "org.assertj:assertj-core:3.9.1"
+    testCompile 'org.codehaus.groovy:groovy-all:2.4.13'
+    testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
+    testCompile 'org.spockframework:spock-spring:1.1-groovy-2.4'
+    testCompile 'org.springframework.cloud:spring-cloud-starter-contract-verifier:1.2.1.RELEASE'
+}
+
+contracts {
+    contractsDslDir = file('./cdc-contracts')
+    generatedTestSourcesDir = file('./build/generated-test-sources')
+    baseClassForTests = 'pl.jerckov.user.service.infrastructure.ServerSpec'
+    basePackageForTests = 'pl.jug.cdc.server.contracts'
 }

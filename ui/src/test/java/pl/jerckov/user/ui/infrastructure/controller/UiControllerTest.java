@@ -31,7 +31,7 @@ public class UiControllerTest {
     @Before
     public void setUp() {
         initMocks(this);
-        mockMvc = standaloneSetup(uiController).build();
+        mockMvc = standaloneSetup(new UiController(userService)).build();
     }
 
     @Test

@@ -4,25 +4,29 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
+import static org.mockito.MockitoAnnotations.initMocks;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-@RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
 
     @Mock
     private UserRepository userRepository;
     @InjectMocks
     private UserService userService;
+
+    @Before
+    public void setUp() {
+        initMocks(this);
+    }
 
     @Test
     public void shouldAddUser() {

@@ -7,7 +7,7 @@ buildscript {
     }
 }
 
-group 'pl.bytebay.shop.pl.bytebay.shop.office'
+group 'pl.jerckov.user.ui'
 version '1.0.0'
 
 apply plugin: 'org.springframework.boot'
@@ -17,6 +17,7 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
@@ -28,4 +29,6 @@ dependencies {
     testCompile "org.mockito:mockito-all:1.10.19"
     testCompile "org.assertj:assertj-core:3.9.1"
     testCompile "org.springframework.boot:spring-boot-starter-test:2.0.0.RELEASE"
+    testCompile "org.springframework.cloud:spring-cloud-starter-contract-stub-runner:1.2.3.RELEASE"
+    testCompile "pl.jerckov.user.service:user-service:+:stubs"
 }
